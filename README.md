@@ -7,10 +7,13 @@
 
 [![R build
 status](https://github.com/OwenWard/ppdiag/workflows/R-CMD-check/badge.svg)](https://github.com/OwenWard/ppdiag/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ppdiag)](https://CRAN.R-project.org/package=ppdiag)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Codecov test
 coverage](https://codecov.io/gh/OwenWard/ppdiag/branch/main/graph/badge.svg)](https://codecov.io/gh/OwenWard/ppdiag?branch=main)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03133/status.svg)](https://doi.org/10.21105/joss.03133)
 <!-- badges: end -->
 
 `ppdiag` is an `R` package which provides a collection of tools which
@@ -25,12 +28,14 @@ These currently include:
 
 # Installation
 
-<!-- You can install the released version of ppdiag from [CRAN](https://CRAN.R-project.org) with: -->
-<!-- ``` r -->
-<!-- install.packages("ppdiag") -->
-<!-- ``` -->
+You can install the released version of ppdiag from
+[CRAN](https://CRAN.R-project.org) with:
 
-The current version of this package is available from
+``` r
+install.packages("ppdiag")
+```
+
+The current development version of this package is available from
 [GitHub](https://github.com/OwenWard/ppdiag) with:
 
 ``` r
@@ -50,17 +55,17 @@ library(ppdiag)
 hp_obj <- pp_hp(lambda0 = 0.2, alpha = 0.35, beta = 0.8)
 sim_hp <- pp_simulate(hp_obj, end = 200)
 sim_hp
-#>  [1]   4.812834   6.359553  18.592838  24.924398  27.477472  39.069081
-#>  [7]  45.447185  48.877789  49.251243  51.583534  52.030700  55.323267
-#> [13]  56.374593  61.075780  61.133379  69.444170  70.426176  78.372408
-#> [19]  80.372094  80.475431  85.501265  88.972648  90.084763  91.974217
-#> [25]  93.779371  93.814669  94.082367  94.257954  94.622148 104.444724
-#> [31] 105.122596 105.259238 105.424769 105.666571 105.938356 106.483103
-#> [37] 106.600113 106.787423 107.352824 108.720862 108.803059 110.341614
-#> [43] 113.346552 116.741642 117.752418 118.790844 118.848347 133.140741
-#> [49] 138.741287 139.056061 139.531597 140.027394 140.594697 143.330178
-#> [55] 158.451919 158.661755 159.933741 167.286287 181.247567 184.667738
-#> [61] 190.190180 190.476203 190.843110 192.188077
+#>  [1]   1.275239   4.783765   5.594645   8.598805  12.615358  13.236031
+#>  [7]  16.646178  17.963423  18.111810  22.084071  26.666076  34.308807
+#> [13]  34.356333  34.495016  34.951780  35.092074  36.397702  37.473565
+#> [19]  37.846293  37.999420  54.822306  54.960122  55.721565  56.161485
+#> [25]  56.825700  57.272058  59.441202  67.259184  67.951046  73.067622
+#> [31]  73.376321  73.864017  74.351076  78.675743  84.520527  86.082185
+#> [37]  86.547380  89.036582  99.411569 100.220569 101.941447 104.265342
+#> [43] 106.553315 115.496473 126.077235 126.679327 126.705392 130.829836
+#> [49] 134.226466 135.613464 135.633740 149.809218 156.366308 156.732731
+#> [55] 157.273463 160.788531 161.764239 166.976330 187.590412 187.737997
+#> [61] 187.994724 195.153693
 ```
 
 We can readily evaluate the fit of a homogeneous Poisson process to this
@@ -69,24 +74,9 @@ data.
 ``` r
 est_hpp <- fithpp(sim_hp)
 est_hpp
-#> $lambda
-#> [1] 0.3330071
-#> 
-#> $events
-#>  [1]   4.812834   6.359553  18.592838  24.924398  27.477472  39.069081
-#>  [7]  45.447185  48.877789  49.251243  51.583534  52.030700  55.323267
-#> [13]  56.374593  61.075780  61.133379  69.444170  70.426176  78.372408
-#> [19]  80.372094  80.475431  85.501265  88.972648  90.084763  91.974217
-#> [25]  93.779371  93.814669  94.082367  94.257954  94.622148 104.444724
-#> [31] 105.122596 105.259238 105.424769 105.666571 105.938356 106.483103
-#> [37] 106.600113 106.787423 107.352824 108.720862 108.803059 110.341614
-#> [43] 113.346552 116.741642 117.752418 118.790844 118.848347 133.140741
-#> [49] 138.741287 139.056061 139.531597 140.027394 140.594697 143.330178
-#> [55] 158.451919 158.661755 159.933741 167.286287 181.247567 184.667738
-#> [61] 190.190180 190.476203 190.843110 192.188077
-#> 
-#> attr(,"class")
-#> [1] "hpp"
+#> Homogeneous Poisson Process 
+#> lambda  
+#> events 1.275239 4.783765 5.594645 8.598805 12.61536 13.23603 16.64618 17.96342 18.11181 22.08407 26.66608 34.30881 34.35633 34.49502 34.95178 35.09207 36.3977 37.47357 37.84629 37.99942 54.82231 54.96012 55.72156 56.16149 56.8257 57.27206 59.4412 67.25918 67.95105 73.06762 73.37632 73.86402 74.35108 78.67574 84.52053 86.08219 86.54738 89.03658 99.41157 100.2206 101.9414 104.2653 106.5533 115.4965 126.0772 126.6793 126.7054 130.8298 134.2265 135.6135 135.6337 149.8092 156.3663 156.7327 157.2735 160.7885 161.7642 166.9763 187.5904 187.738 187.9947 195.1537
 
 pp_diag(est_hpp, events = sim_hp)
 ```
@@ -94,13 +84,13 @@ pp_diag(est_hpp, events = sim_hp)
 <img src="man/figures/README-fit_hpp-1.png" width="75%" />
 
     #> 
-    #> Raw residual: 0
-    #> Pearson residual: 0
+    #> Raw residual: -7.105427e-15
+    #> Pearson residual: 1.421085e-14
     #> 
     #>  One-sample Kolmogorov-Smirnov test
     #> 
     #> data:  r
-    #> D = 0.21848, p-value = 0.003664
+    #> D = 0.20838, p-value = 0.007712
     #> alternative hypothesis: two-sided
 
 ``` r
@@ -110,20 +100,20 @@ pp_diag(hp_est, events = sim_hp)
 
 <img src="man/figures/README-fit_hp-1.png" width="75%" />
 
-    #> Raw residual: 2.249111e-05
-    #> Pearson residual: -0.2604292
+    #> Raw residual: -0.002513104
+    #> Pearson residual: 0.2040545
     #> 
     #>  One-sample Kolmogorov-Smirnov test
     #> 
     #> data:  r
-    #> D = 0.05335, p-value = 0.9888
+    #> D = 0.075428, p-value = 0.846
     #> alternative hypothesis: two-sided
 
-## MMHP Example
+## Markov Modulated Hawkes Process Example
 
 This is particularly useful for more complex point processes, such as
-the Markov Modulated Hawkes Process. We can simulate events from this
-model and examine the fit of simpler point processes to this data.
+the Markov Modulated Hawkes Process (MMHP). We can simulate events from
+this model and examine the fit of simpler point processes to this data.
 
 ``` r
 Q <- matrix(c(-0.2, 0.2, 0.1, -0.1), ncol = 2, byrow = TRUE)
@@ -135,31 +125,13 @@ mmhp_obj <- pp_mmhp(Q, delta = c(1 / 3, 2 / 3),
           beta = 0.8)
 
 mmhp_obj
-#> $Q
-#>      [,1] [,2]
-#> [1,] -0.2  0.2
-#> [2,]  0.1 -0.1
-#> 
-#> $delta
-#> [1] 0.3333333 0.6666667
-#> 
-#> $events
-#> NULL
-#> 
-#> $lambda0
-#> [1] 0.2
-#> 
-#> $lambda1
-#> [1] 0.75
-#> 
-#> $alpha
-#> [1] 0.4
-#> 
-#> $beta
-#> [1] 0.8
-#> 
-#> attr(,"class")
-#> [1] "mmhp"
+#> Markov Modulated Hawkes Process 
+#> lambda0  0.2 
+#> lambda1  0.75 
+#> alpha  0.4 
+#> beta  0.8 
+#> Q  -0.2 0.1 0.2 -0.1 
+#> delta 0.3333333 0.6666667
 mmhp_events <- pp_simulate(mmhp_obj, n = 50)
 ```
 
@@ -175,12 +147,12 @@ pp_diag(est_hpp,mmhp_events$events)
 
     #> 
     #> Raw residual: -1
-    #> Pearson residual: -1.620493
+    #> Pearson residual: -1.270479
     #> 
     #>  One-sample Kolmogorov-Smirnov test
     #> 
     #> data:  r
-    #> D = 0.23966, p-value = 0.005185
+    #> D = 0.30169, p-value = 0.000156
     #> alternative hypothesis: two-sided
 
 Similarly for a Hawkes process.
@@ -192,13 +164,13 @@ pp_diag(est_hp,mmhp_events$events)
 
 <img src="man/figures/README-fit_hp_to_mmhp-1.png" width="75%" />
 
-    #> Raw residual: -0.6673263
-    #> Pearson residual: -1.781394
+    #> Raw residual: -0.3695538
+    #> Pearson residual: -1.850818
     #> 
     #>  One-sample Kolmogorov-Smirnov test
     #> 
     #> data:  r
-    #> D = 0.095957, p-value = 0.7105
+    #> D = 0.081193, p-value = 0.87
     #> alternative hypothesis: two-sided
 
 We can then compare to the true point process model.
@@ -209,13 +181,13 @@ pp_diag(mmhp_obj, mmhp_events$events)
 
 <img src="man/figures/README-fit_mmhp-1.png" width="75%" />
 
-    #> Raw residual: 13.94491
-    #> Pearson residual: 22.13206
+    #> Raw residual: 6.507162
+    #> Pearson residual: 3.326864
     #> 
     #>  One-sample Kolmogorov-Smirnov test
     #> 
     #> data:  r
-    #> D = 0.11593, p-value = 0.4771
+    #> D = 0.1025, p-value = 0.6324
     #> alternative hypothesis: two-sided
 
 # Getting help and contributing
@@ -223,9 +195,18 @@ pp_diag(mmhp_obj, mmhp_events$events)
 Please file any issues
 [here](https://github.com/OwenWard/ppdiag/issues). Similarly, we would
 be delighted if anyone would like to contribute to this package (such as
-adding other point processes, kernel functions). Feel free to reach out.
+adding other point processes, kernel functions). Feel free to take a
+look
+[here](https://github.com/OwenWard/ppdiag/blob/main/CONTRIBUTING.md) and
+reach out with any questions.
 
 # References
 
--   Wu et al., Diagnostics and Visualization of Point Process Models for
-    Event Times on a Social Network, <https://arxiv.org/abs/2001.09359>
+-   Sun et al., (2021). ppdiag: Diagnostic Tools for Temporal Point
+    Processes. Journal of Open Source Software, 6(61), 3133,
+    <https://doi.org/10.21105/joss.03133>
+-   Wu et al. (2021), Diagnostics and Visualization of Point Process
+    Models for Event Times on a Social Network, In Applied Modeling
+    Techniques and Data Analysis 1 (eds Y. Dimotikalis, A.
+    Karagrigoriou, C. Parpoula and C.H. Skiadas).
+    <https://doi.org/10.1002/9781119821588.ch7>
